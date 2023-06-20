@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ResponseToSaveChildPlanDetails {
 
-	private Integer customerId;
+	private Long customerId;
 	private String childName;
 	private Integer childAge;
 	private String goalType;
@@ -41,14 +41,14 @@ public class ResponseToSaveChildPlanDetails {
 	/**
 	 * @return the customerId
 	 */
-	public Integer getCustomerId() {
+	public Long getCustomerId() {
 		return customerId;
 	}
 
 	/**
 	 * @param customerId the customerId to set
 	 */
-	public void setCustomerId(Integer customerId) {
+	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
 

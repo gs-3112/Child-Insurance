@@ -4,9 +4,7 @@
 package com.adityabirlacapital.childlifeinsurance.mapper;
 
 import java.time.LocalDateTime;
-
 import org.springframework.stereotype.Component;
-
 import com.adityabirlacapital.childlifeinsurance.controller.entity.ChildPlan;
 import com.adityabirlacapital.childlifeinsurance.controller.entity.Customer;
 import com.adityabirlacapital.childlifeinsurance.controller.vo.RequestToSaveChildPlanDeatils;
@@ -26,9 +24,10 @@ public class ChildPlanEntityMapper {
 		ChildPlan childPlan = new ChildPlan();
 		
 		Customer customer = new Customer();
-		customer.setPersonId(request.getCustomerId());
+		customer.setId(request.getCustomerId());
 		
-		childPlan.setPersonId(customer);
+		childPlan.setCustomer(customer);
+		
 		childPlan.setChildName(request.getChildName());
 		
 		childPlan.setChildAge(request.getChildAge());
@@ -63,7 +62,7 @@ public class ChildPlanEntityMapper {
 		
 		response.setLiChildId(childPlan.getLiChildId());
 		
-		response.setCustomerId(childPlan.getPersonId().getPersonId());
+		response.setCustomerId(childPlan.getCustomer().getId());
 		
 		response.setChildName(childPlan.getChildName());
 		

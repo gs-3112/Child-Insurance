@@ -1,34 +1,34 @@
 package com.adityabirlacapital.childlifeinsurance.controller.entity;
 
 import java.time.LocalDateTime;
+
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import jakarta.persistence.CascadeType;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Data
-@Table(name="TLIChildInsurance")
+@Table(name="T_Child_Insurance")
 public class ChildPlan {
 
 	@Id
 	@Column(name = "LIChildId")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer liChildId;
 	
-	@OneToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "person_id")
-	private Customer personId;
+	@JsonBackReference
+	@ManyToOne
+	Customer customer;
 	
 	@Column(name = "childName")
 	private String childName;

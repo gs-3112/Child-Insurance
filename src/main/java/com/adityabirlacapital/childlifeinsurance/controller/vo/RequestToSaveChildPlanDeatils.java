@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class RequestToSaveChildPlanDeatils {
 
-	private Integer customerId;
+	private Long customerId;
 	private String childName;
 	private Integer childAge;
 	private String goalType;
@@ -26,13 +26,6 @@ public class RequestToSaveChildPlanDeatils {
 	 */
 	private String active;
 
-	public Integer getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
-	}
 
 	public String getChildName() {
 		return childName;
@@ -112,6 +105,20 @@ public class RequestToSaveChildPlanDeatils {
 
 	public void setActive(String active) {
 		this.active = active;
+	}
+
+	/**
+	 * @return the customerId
+	 */
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	/**
+	 * @param customerId the customerId to set
+	 */
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 	
 	
