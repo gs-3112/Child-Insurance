@@ -3,12 +3,13 @@
  */
 package com.adityabirlacapital.childlifeinsurance.mapper;
 
-import java.time.LocalDateTime;
+import com.adityabirlacapital.childlifeinsurance.entity.ChildPlan;
+import com.adityabirlacapital.childlifeinsurance.entity.Customer;
+import com.adityabirlacapital.childlifeinsurance.vo.RequestToSaveChildPlanDeatils;
+import com.adityabirlacapital.childlifeinsurance.vo.ResponseToSaveChildPlanDetails;
 import org.springframework.stereotype.Component;
-import com.adityabirlacapital.childlifeinsurance.controller.entity.ChildPlan;
-import com.adityabirlacapital.childlifeinsurance.controller.entity.Customer;
-import com.adityabirlacapital.childlifeinsurance.controller.vo.RequestToSaveChildPlanDeatils;
-import com.adityabirlacapital.childlifeinsurance.controller.vo.ResponseToSaveChildPlanDetails;
+
+import java.time.LocalDateTime;
 
 
 /**
@@ -49,6 +50,8 @@ public class ChildPlanEntityMapper {
 		childPlan.setCreatedDate(LocalDateTime.now());
 		
 		childPlan.setModifiedDate(LocalDateTime.now());
+		
+		childPlan.setActive(request.getActive());
 		
 		return childPlan;
 	}

@@ -1,8 +1,7 @@
-package com.adityabirlacapital.childlifeinsurance.controller.vo;
+package com.adityabirlacapital.childlifeinsurance.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
@@ -24,7 +23,7 @@ public class RequestToSaveChildPlanDeatils {
 	/*
 	 * Not sure what is this field for
 	 */
-	private String active;
+	private Boolean active;
 
 
 	public String getChildName() {
@@ -99,13 +98,6 @@ public class RequestToSaveChildPlanDeatils {
 		this.modifiedBy = modifiedBy;
 	}
 
-	public String getActive() {
-		return active;
-	}
-
-	public void setActive(String active) {
-		this.active = active;
-	}
 
 	/**
 	 * @return the customerId
@@ -119,6 +111,20 @@ public class RequestToSaveChildPlanDeatils {
 	 */
 	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
+	}
+
+	/**
+	 * @return the active
+	 */
+	public Boolean getActive() {
+		return active;
+	}
+
+	/**
+	 * @param active the active to set
+	 */
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 	
 	

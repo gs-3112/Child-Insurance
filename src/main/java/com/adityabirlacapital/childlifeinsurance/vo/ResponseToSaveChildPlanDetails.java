@@ -1,15 +1,10 @@
-package com.adityabirlacapital.childlifeinsurance.controller.vo;
+package com.adityabirlacapital.childlifeinsurance.vo;
 
-import java.time.LocalDateTime;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,7 +31,7 @@ public class ResponseToSaveChildPlanDetails {
 	private Double expensesFinal;
 	private Double saveAmount;
 
-	private String active;
+	private Boolean active;
 
 	/**
 	 * @return the customerId
@@ -221,20 +216,6 @@ public class ResponseToSaveChildPlanDetails {
 	}
 
 	/**
-	 * @return the active
-	 */
-	public String getActive() {
-		return active;
-	}
-
-	/**
-	 * @param active the active to set
-	 */
-	public void setActive(String active) {
-		this.active = active;
-	}
-
-	/**
 	 * @return the modifiedDate
 	 */
 	public LocalDateTime getModifiedDate() {
@@ -260,6 +241,20 @@ public class ResponseToSaveChildPlanDetails {
 	 */
 	public void setCreatedDate(LocalDateTime createdDate) {
 		this.createdDate = createdDate;
+	}
+
+	/**
+	 * @return the active
+	 */
+	public Boolean getActive() {
+		return active;
+	}
+
+	/**
+	 * @param active the active to set
+	 */
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 	
 	
