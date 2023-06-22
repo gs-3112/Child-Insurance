@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.adityabirlacapital.childlifeinsurance.controller;
+package com.adityabirlacapital.childlifeinsurance.rest;
 
 import com.adityabirlacapital.childlifeinsurance.service.ChildPlanService;
 import com.adityabirlacapital.childlifeinsurance.vo.RequestToSaveChildPlanDeatils;

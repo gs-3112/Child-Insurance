@@ -1,9 +1,8 @@
 /**
  * 
  */
-package com.adityabirlacapital.childlifeinsurance.controller;
+package com.adityabirlacapital.childlifeinsurance.rest;
 
-import com.adityabirlacapital.childlifeinsurance.entity.InflationRate;
 import com.adityabirlacapital.childlifeinsurance.service.InflationRateService;
 import com.adityabirlacapital.childlifeinsurance.vo.InflationRateResponse;
 import com.adityabirlacapital.childlifeinsurance.vo.RequestToAddInflationRate;

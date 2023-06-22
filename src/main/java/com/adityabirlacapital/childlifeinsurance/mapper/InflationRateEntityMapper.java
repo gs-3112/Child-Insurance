@@ -21,29 +21,32 @@ public class InflationRateEntityMapper {
     public List<InflationRateResponse> mapToInflationRateResponse(List<InflationRate> findAll) {
         List<InflationRateResponse> list = new ArrayList<InflationRateResponse>();
         for (InflationRate inflationRate : findAll) {
-            InflationRateResponse response = new InflationRateResponse();
-            response.setInflationRate(inflationRate.getInflationRate());
-            response.setInflationRateId(inflationRate.getInflationRateId());
+            InflationRateResponse response = InflationRateResponse.builder()
+                    .inflationRateId(inflationRate.getInflationRateId())
+                    .inflationRate(inflationRate.getInflationRate())
+                    .build();
             list.add(response);
         }
         return list;
     }
 
     public InflationRateResponse mapToInflationRateResponse(InflationRate inflationRate) {
-        InflationRateResponse response = new InflationRateResponse();
-        response.setInflationRate(inflationRate.getInflationRate());
-        response.setInflationRateId(inflationRate.getInflationRateId());
+        InflationRateResponse response = InflationRateResponse.builder()
+                .inflationRateId(inflationRate.getInflationRateId())
+                .inflationRate(inflationRate.getInflationRate())
+                .build();
         return response;
     }
 
     public InflationRate mapToInflationRateEntity(RequestToAddInflationRate request) {
-        InflationRate entity = new InflationRate();
-        entity.setInflationRate(request.getInflationRate());
-		entity.setActive(true);
-		entity.setCreatedBy(request.getCreatedBy());
-		entity.setModifiedBy(request.getModifiedBy());
-		entity.setCreatedDate(LocalDateTime.now());
-        entity.setModifiedDate(LocalDateTime.now());
+        InflationRate entity = InflationRate.builder()
+                .inflationRate(request.getInflationRate())
+                .active(request.isActive())
+                .createdBy(request.getCreatedBy())
+                .modifiedBy(request.getModifiedBy())
+                .createdDate(LocalDateTime.now())
+                .modifiedDate(LocalDateTime.now())
+                .build();
         return entity;
     }
 }

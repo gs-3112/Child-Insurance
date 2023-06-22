@@ -22,37 +22,25 @@ public class ChildPlanEntityMapper {
 	 * convert to request object to child plan entity
 	 */
 	public ChildPlan mapToChildPlanEntity(RequestToSaveChildPlanDeatils request) {
-		ChildPlan childPlan = new ChildPlan();
-		
-		Customer customer = new Customer();
-		customer.setId(request.getCustomerId());
-		
-		childPlan.setCustomer(customer);
-		
-		childPlan.setChildName(request.getChildName());
-		
-		childPlan.setChildAge(request.getChildAge());
-		
-		childPlan.setGoalType(request.getGoalType());
-		
-		childPlan.setGoalAmt(request.getGoalAmt());
-		
-		childPlan.setGoalTenure(request.getGoalTenure());
-		
-		childPlan.setRoi(request.getRoi());
-		
-		childPlan.setTenure(request.getTenure());
-		
-		childPlan.setCreatedBy(request.getCreatedBy());
+		Customer customer = Customer.builder()
+				.id(request.getCustomerId())
+				.build();
 
-		childPlan.setModifiedBy(request.getModifiedBy());
-		
-		childPlan.setCreatedDate(LocalDateTime.now());
-		
-		childPlan.setModifiedDate(LocalDateTime.now());
-		
-		childPlan.setActive(request.getActive());
-		
+		ChildPlan childPlan = ChildPlan.builder()
+				.customer(customer)
+				.childName(request.getChildName())
+				.childAge(request.getChildAge())
+				.goalType(request.getGoalType())
+				.goalAmt(request.getGoalAmt())
+				.goalTenure(request.getGoalTenure())
+				.roi(request.getRoi())
+				.tenure(request.getTenure())
+				.createdBy(request.getCreatedBy())
+				.modifiedBy(request.getModifiedBy())
+				.createdDate(LocalDateTime.now())
+				.modifiedDate(LocalDateTime.now())
+				.active(request.getActive())
+				.build();
 		return childPlan;
 	}
 
@@ -61,38 +49,22 @@ public class ChildPlanEntityMapper {
 	 * convert child plan entity to response object to 
 	 */
 	public ResponseToSaveChildPlanDetails mapToChildPlanResponse(ChildPlan childPlan) {
-		ResponseToSaveChildPlanDetails response = new ResponseToSaveChildPlanDetails();
-		
-		response.setLiChildId(childPlan.getLiChildId());
-		
-		response.setCustomerId(childPlan.getCustomer().getId());
-		
-		response.setChildName(childPlan.getChildName());
-		
-		response.setChildAge(childPlan.getChildAge());
-		
-		response.setGoalType(childPlan.getGoalType());
-		
-		response.setGoalAmt(childPlan.getGoalAmt());
-		
-		response.setGoalTenure(childPlan.getGoalTenure());
-		
-		response.setRoi(childPlan.getRoi());
-		
-		response.setTenure(childPlan.getTenure());
-		
-		response.setCreatedBy(childPlan.getCreatedBy());
-
-		response.setModifiedBy(childPlan.getModifiedBy());
-		
-		response.setCreatedDate(LocalDateTime.now());
-		
-		response.setModifiedDate(LocalDateTime.now());
-		
-		response.setSaveAmount(childPlan.getSaveAmount());
-		
-		response.setExpensesFinal(childPlan.getExpensesFinal());
-		
+		ResponseToSaveChildPlanDetails response = ResponseToSaveChildPlanDetails.builder()
+				.liChildId(childPlan.getLiChildId())
+				.customerId(childPlan.getCustomer().getId())
+				.childName(childPlan.getChildName())
+				.childAge(childPlan.getChildAge())
+				.goalType(childPlan.getGoalType())
+				.goalAmt(childPlan.getGoalAmt())
+				.goalTenure(childPlan.getGoalTenure())
+				.roi(childPlan.getRoi())
+				.tenure(childPlan.getTenure())
+				.createdBy(childPlan.getCreatedBy())
+				.modifiedBy(childPlan.getModifiedBy())
+				.createdDate(LocalDateTime.now())
+				.modifiedDate(LocalDateTime.now())
+				.active(childPlan.isActive())
+				.build();
 		return response;
 	}
 }
