@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @Builder
-public class ResponseToSaveChildPlanDetails {
+public class ResponseToAddChildPlanDetails {
 
 	private Long customerId;
 	private String childName;

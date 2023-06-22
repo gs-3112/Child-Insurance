@@ -4,15 +4,15 @@
 package com.adityabirlacapital.childlifeinsurance.rest;
 
 import com.adityabirlacapital.childlifeinsurance.service.ChildPlanService;
-import com.adityabirlacapital.childlifeinsurance.vo.RequestToSaveChildPlanDeatils;
-import com.adityabirlacapital.childlifeinsurance.vo.ResponseToSaveChildPlanDetails;
+import com.adityabirlacapital.childlifeinsurance.vo.RequestToAddChildPlanDeatils;
+import com.adityabirlacapital.childlifeinsurance.vo.ResponseToAddChildPlanDetails;
+import com.adityabirlacapital.childlifeinsurance.vo.ResponseToGetChildPlanDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -26,10 +26,14 @@ public class ChildPlanController {
 	private ChildPlanService childPlanService;
 	
 	@PostMapping
-	public ResponseEntity<ResponseToSaveChildPlanDetails> saveChildLifeInsuranceDtails(@RequestBody RequestToSaveChildPlanDeatils request) {
-		ResponseToSaveChildPlanDetails response = childPlanService.saveChildPlanDetails(request);
-		
-		return new ResponseEntity<ResponseToSaveChildPlanDetails>(response,HttpStatus.CREATED);
+	public ResponseEntity<ResponseToAddChildPlanDetails> addChildLifeInsuranceDtails(@RequestBody RequestToAddChildPlanDeatils request) {
+		ResponseToAddChildPlanDetails response = childPlanService.saveChildPlanDetails(request);
+		return new ResponseEntity<ResponseToAddChildPlanDetails>(response,HttpStatus.CREATED);
 	}
-	
+
+	@GetMapping("/{customerId}")
+	public ResponseEntity<List<ResponseToGetChildPlanDetails>> getChildPlanDtails(@PathVariable("customerId") Long customerId) {
+		List<ResponseToGetChildPlanDetails> responseList = childPlanService.getChildPlanDetails(customerId);
+		return new ResponseEntity<>(responseList,HttpStatus.OK);
+	}
 }

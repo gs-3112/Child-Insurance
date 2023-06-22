@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class RequestToSaveChildPlanDeatils {
+public class RequestToAddChildPlanDeatils {
 
 	private Long customerId;
 	private String childName;

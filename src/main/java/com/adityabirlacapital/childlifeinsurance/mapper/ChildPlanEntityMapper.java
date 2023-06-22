@@ -5,11 +5,14 @@ package com.adityabirlacapital.childlifeinsurance.mapper;
 
 import com.adityabirlacapital.childlifeinsurance.entity.ChildPlan;
 import com.adityabirlacapital.childlifeinsurance.entity.Customer;
-import com.adityabirlacapital.childlifeinsurance.vo.RequestToSaveChildPlanDeatils;
-import com.adityabirlacapital.childlifeinsurance.vo.ResponseToSaveChildPlanDetails;
+import com.adityabirlacapital.childlifeinsurance.vo.RequestToAddChildPlanDeatils;
+import com.adityabirlacapital.childlifeinsurance.vo.ResponseToAddChildPlanDetails;
+import com.adityabirlacapital.childlifeinsurance.vo.ResponseToGetChildPlanDetails;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -21,7 +24,7 @@ public class ChildPlanEntityMapper {
 	/*
 	 * convert to request object to child plan entity
 	 */
-	public ChildPlan mapToChildPlanEntity(RequestToSaveChildPlanDeatils request) {
+	public ChildPlan mapToChildPlanEntity(RequestToAddChildPlanDeatils request) {
 		Customer customer = Customer.builder()
 				.id(request.getCustomerId())
 				.build();
@@ -48,8 +51,8 @@ public class ChildPlanEntityMapper {
 	/*
 	 * convert child plan entity to response object to 
 	 */
-	public ResponseToSaveChildPlanDetails mapToChildPlanResponse(ChildPlan childPlan) {
-		ResponseToSaveChildPlanDetails response = ResponseToSaveChildPlanDetails.builder()
+	public ResponseToAddChildPlanDetails mapToAddChildPlanResponse(ChildPlan childPlan) {
+		ResponseToAddChildPlanDetails response = ResponseToAddChildPlanDetails.builder()
 				.liChildId(childPlan.getLiChildId())
 				.customerId(childPlan.getCustomer().getId())
 				.childName(childPlan.getChildName())
@@ -66,5 +69,33 @@ public class ChildPlanEntityMapper {
 				.active(childPlan.isActive())
 				.build();
 		return response;
+	}
+
+	public ResponseToGetChildPlanDetails mapToGetChildPlanResponse(ChildPlan childPlan) {
+		ResponseToGetChildPlanDetails response = ResponseToGetChildPlanDetails.builder()
+				.liChildId(childPlan.getLiChildId())
+				.customerId(childPlan.getCustomer().getId())
+				.childName(childPlan.getChildName())
+				.childAge(childPlan.getChildAge())
+				.goalType(childPlan.getGoalType())
+				.goalAmt(childPlan.getGoalAmt())
+				.goalTenure(childPlan.getGoalTenure())
+				.roi(childPlan.getRoi())
+				.tenure(childPlan.getTenure())
+				.createdBy(childPlan.getCreatedBy())
+				.modifiedBy(childPlan.getModifiedBy())
+				.createdDate(LocalDateTime.now())
+				.modifiedDate(LocalDateTime.now())
+				.active(childPlan.isActive())
+				.build();
+		return response;
+	}
+
+	public List<ResponseToGetChildPlanDetails> mapToGetChildPlanEntity(List<ChildPlan> list) {
+		List<ResponseToGetChildPlanDetails> responseList = new ArrayList<>();
+		for (ChildPlan entity:list) {
+			responseList.add(mapToGetChildPlanResponse(entity));
+		}
+		return responseList;
 	}
 }
