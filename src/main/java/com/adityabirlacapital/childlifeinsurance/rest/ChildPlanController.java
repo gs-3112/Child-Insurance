@@ -26,7 +26,7 @@ public class ChildPlanController {
 	private ChildPlanService childPlanService;
 	
 	@PostMapping
-	public ResponseEntity<ResponseToAddChildPlanDetails> addChildLifeInsuranceDtails(@RequestBody RequestToAddChildPlanDeatils request) {
+	public ResponseEntity<ResponseToAddChildPlanDetails> addChildLifeInsuranceDetails(@RequestBody RequestToAddChildPlanDeatils request) {
 		ResponseToAddChildPlanDetails response = childPlanService.saveChildPlanDetails(request);
 		return new ResponseEntity<ResponseToAddChildPlanDetails>(response,HttpStatus.CREATED);
 	}
