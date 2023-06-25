@@ -21,11 +21,7 @@ public class InflationRateEntityMapper {
     public List<InflationRateResponse> mapToInflationRateResponse(List<InflationRate> findAll) {
         List<InflationRateResponse> list = new ArrayList<InflationRateResponse>();
         for (InflationRate inflationRate : findAll) {
-            InflationRateResponse response = InflationRateResponse.builder()
-                    .inflationRateId(inflationRate.getInflationRateId())
-                    .inflationRate(inflationRate.getInflationRate())
-                    .build();
-            list.add(response);
+            list.add(mapToInflationRateResponse(inflationRate));
         }
         return list;
     }
@@ -34,6 +30,9 @@ public class InflationRateEntityMapper {
         InflationRateResponse response = InflationRateResponse.builder()
                 .inflationRateId(inflationRate.getInflationRateId())
                 .inflationRate(inflationRate.getInflationRate())
+                .active(inflationRate.isActive())
+                .modifiedBy(inflationRate.getModifiedBy())
+                .createdBy(inflationRate.getCreatedBy())
                 .build();
         return response;
     }

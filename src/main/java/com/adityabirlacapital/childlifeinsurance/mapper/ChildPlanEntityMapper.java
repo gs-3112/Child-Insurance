@@ -43,6 +43,8 @@ public class ChildPlanEntityMapper {
 				.createdDate(LocalDateTime.now())
 				.modifiedDate(LocalDateTime.now())
 				.active(request.getActive())
+				.expensesFinal(request.getExpensesFinal())
+				.saveAmount(request.getSaveAmount())
 				.build();
 		return childPlan;
 	}
@@ -62,6 +64,8 @@ public class ChildPlanEntityMapper {
 				.goalTenure(childPlan.getGoalTenure())
 				.roi(childPlan.getRoi())
 				.tenure(childPlan.getTenure())
+				.saveAmount(childPlan.getSaveAmount())
+				.expensesFinal(childPlan.getExpensesFinal())
 				.createdBy(childPlan.getCreatedBy())
 				.modifiedBy(childPlan.getModifiedBy())
 				.createdDate(LocalDateTime.now())
@@ -82,6 +86,8 @@ public class ChildPlanEntityMapper {
 				.goalTenure(childPlan.getGoalTenure())
 				.roi(childPlan.getRoi())
 				.tenure(childPlan.getTenure())
+				.saveAmount(childPlan.getSaveAmount())
+				.expensesFinal(childPlan.getExpensesFinal())
 				.createdBy(childPlan.getCreatedBy())
 				.modifiedBy(childPlan.getModifiedBy())
 				.createdDate(LocalDateTime.now())

@@ -29,8 +29,8 @@ public class ChildPlanService {
 	public ResponseToAddChildPlanDetails saveChildPlanDetails(RequestToAddChildPlanDeatils request) {
 		ChildPlan requestEntity = childPlanEntityMapper.mapToChildPlanEntity(request);
 		// Calculator will calculate these values.
-		requestEntity.setSaveAmount(10000d);
-		requestEntity.setExpensesFinal(3000d);
+//		requestEntity.setSaveAmount(10000d);
+//		requestEntity.setExpensesFinal(3000d);
 		ChildPlan savedEntity = childPlanRepositoy.save(requestEntity);
 		ResponseToAddChildPlanDetails response = childPlanEntityMapper.mapToAddChildPlanResponse((savedEntity));
 		return response;

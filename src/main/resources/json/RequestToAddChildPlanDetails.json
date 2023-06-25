@@ -1,0 +1,16 @@
+{
+  "customerId": 1,
+  "childName": "Sagar",
+  "childAge": 5,
+  "goalType": "Education",
+  "goalAmt": 2000.0,
+  "goalTenure": 12,
+  "tenure": 12,
+  "roi": 4,
+  "createdBy": "Aman",
+  "modifiedBy": "Aman",
+  "liChildId": 1,
+  "expensesFinal": 3000,
+  "saveAmount": 10000,
+  "active": true
+}

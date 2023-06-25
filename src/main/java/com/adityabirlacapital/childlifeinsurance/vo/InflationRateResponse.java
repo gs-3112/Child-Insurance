@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 /**
  * 
  */
@@ -18,5 +20,10 @@ import lombok.NoArgsConstructor;
 public class InflationRateResponse {
 	private Integer inflationRateId;
 	private Integer inflationRate;
+	private String createdBy;
+	private String modifiedBy;
+	private LocalDateTime modifiedDate;
+	private LocalDateTime createdDate;
+	private Boolean active;
 
 }
