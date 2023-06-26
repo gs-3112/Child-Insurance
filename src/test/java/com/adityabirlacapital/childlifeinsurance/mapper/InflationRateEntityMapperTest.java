@@ -1,8 +1,8 @@
 package com.adityabirlacapital.childlifeinsurance.mapper;
 
 import com.adityabirlacapital.childlifeinsurance.entity.InflationRate;
-import com.adityabirlacapital.childlifeinsurance.vo.InflationRateResponse;
-import com.adityabirlacapital.childlifeinsurance.vo.RequestToAddInflationRate;
+import com.adityabirlacapital.childlifeinsurance.dto.InflationRateResponse;
+import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddInflationRate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,13 +63,11 @@ public class InflationRateEntityMapperTest {
                 .inflationRate(4)
                 .createdBy("Sagar")
                 .modifiedBy("Sagar")
-                .active(true)
                 .build();
         InflationRate inflationRate = inflationRateEntityMapper.mapToInflationRateEntity(request);
         Assertions.assertEquals(request.getInflationRate(),inflationRate.getInflationRate());
         Assertions.assertEquals(request.getCreatedBy(),inflationRate.getCreatedBy());
         Assertions.assertEquals(request.getModifiedBy(),inflationRate.getModifiedBy());
-        Assertions.assertEquals(request.isActive(),inflationRate.isActive());
     }
 }
 

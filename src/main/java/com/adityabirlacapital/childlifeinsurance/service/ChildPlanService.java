@@ -4,12 +4,11 @@
 package com.adityabirlacapital.childlifeinsurance.service;
 
 import com.adityabirlacapital.childlifeinsurance.entity.ChildPlan;
-import com.adityabirlacapital.childlifeinsurance.entity.Customer;
 import com.adityabirlacapital.childlifeinsurance.mapper.ChildPlanEntityMapper;
 import com.adityabirlacapital.childlifeinsurance.repository.ChildPlanRepositoy;
-import com.adityabirlacapital.childlifeinsurance.vo.RequestToAddChildPlanDeatils;
-import com.adityabirlacapital.childlifeinsurance.vo.ResponseToAddChildPlanDetails;
-import com.adityabirlacapital.childlifeinsurance.vo.ResponseToGetChildPlanDetails;
+import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDeatils;
+import com.adityabirlacapital.childlifeinsurance.dto.ResponseToAddChildPlanDetails;
+import com.adityabirlacapital.childlifeinsurance.dto.ResponseToGetChildPlanDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

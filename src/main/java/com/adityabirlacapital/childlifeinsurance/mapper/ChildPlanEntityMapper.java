@@ -5,9 +5,9 @@ package com.adityabirlacapital.childlifeinsurance.mapper;
 
 import com.adityabirlacapital.childlifeinsurance.entity.ChildPlan;
 import com.adityabirlacapital.childlifeinsurance.entity.Customer;
-import com.adityabirlacapital.childlifeinsurance.vo.RequestToAddChildPlanDeatils;
-import com.adityabirlacapital.childlifeinsurance.vo.ResponseToAddChildPlanDetails;
-import com.adityabirlacapital.childlifeinsurance.vo.ResponseToGetChildPlanDetails;
+import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDeatils;
+import com.adityabirlacapital.childlifeinsurance.dto.ResponseToAddChildPlanDetails;
+import com.adityabirlacapital.childlifeinsurance.dto.ResponseToGetChildPlanDetails;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -42,7 +42,6 @@ public class ChildPlanEntityMapper {
 				.modifiedBy(request.getModifiedBy())
 				.createdDate(LocalDateTime.now())
 				.modifiedDate(LocalDateTime.now())
-				.active(request.getActive())
 				.expensesFinal(request.getExpensesFinal())
 				.saveAmount(request.getSaveAmount())
 				.build();

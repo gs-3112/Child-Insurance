@@ -1,4 +1,4 @@
-package com.adityabirlacapital.childlifeinsurance.vo;
+package com.adityabirlacapital.childlifeinsurance.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

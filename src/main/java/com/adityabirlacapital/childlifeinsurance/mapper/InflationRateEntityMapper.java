@@ -4,8 +4,8 @@
 package com.adityabirlacapital.childlifeinsurance.mapper;
 
 import com.adityabirlacapital.childlifeinsurance.entity.InflationRate;
-import com.adityabirlacapital.childlifeinsurance.vo.InflationRateResponse;
-import com.adityabirlacapital.childlifeinsurance.vo.RequestToAddInflationRate;
+import com.adityabirlacapital.childlifeinsurance.dto.InflationRateResponse;
+import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddInflationRate;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -33,6 +33,8 @@ public class InflationRateEntityMapper {
                 .active(inflationRate.isActive())
                 .modifiedBy(inflationRate.getModifiedBy())
                 .createdBy(inflationRate.getCreatedBy())
+                .createdDate(inflationRate.getCreatedDate())
+                .modifiedDate(inflationRate.getModifiedDate())
                 .build();
         return response;
     }
@@ -40,7 +42,6 @@ public class InflationRateEntityMapper {
     public InflationRate mapToInflationRateEntity(RequestToAddInflationRate request) {
         InflationRate entity = InflationRate.builder()
                 .inflationRate(request.getInflationRate())
-                .active(request.isActive())
                 .createdBy(request.getCreatedBy())
                 .modifiedBy(request.getModifiedBy())
                 .createdDate(LocalDateTime.now())

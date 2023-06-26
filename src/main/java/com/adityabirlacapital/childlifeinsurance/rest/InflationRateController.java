@@ -4,8 +4,8 @@
 package com.adityabirlacapital.childlifeinsurance.rest;
 
 import com.adityabirlacapital.childlifeinsurance.service.InflationRateService;
-import com.adityabirlacapital.childlifeinsurance.vo.InflationRateResponse;
-import com.adityabirlacapital.childlifeinsurance.vo.RequestToAddInflationRate;
+import com.adityabirlacapital.childlifeinsurance.dto.InflationRateResponse;
+import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddInflationRate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

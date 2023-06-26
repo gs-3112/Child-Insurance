@@ -1,18 +1,12 @@
 package com.adityabirlacapital.childlifeinsurance.service;
 
-import com.adityabirlacapital.childlifeinsurance.entity.ChildPlan;
 import com.adityabirlacapital.childlifeinsurance.entity.InflationRate;
 import com.adityabirlacapital.childlifeinsurance.mapper.InflationRateEntityMapper;
 import com.adityabirlacapital.childlifeinsurance.repository.InflationRateRepository;
-import com.adityabirlacapital.childlifeinsurance.vo.InflationRateResponse;
-import com.adityabirlacapital.childlifeinsurance.vo.RequestToAddChildPlanDeatils;
-import com.adityabirlacapital.childlifeinsurance.vo.RequestToAddInflationRate;
-import com.adityabirlacapital.childlifeinsurance.vo.ResponseToAddChildPlanDetails;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.adityabirlacapital.childlifeinsurance.dto.InflationRateResponse;
+import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddInflationRate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -39,7 +33,6 @@ public class InflationRateServiceTest {
                 .inflationRate(4)
                 .createdBy("Sagar")
                 .modifiedBy("Sagar")
-                .active(true)
                 .build();
         // Set up the requested entity
         InflationRate requestedEntity = InflationRate.builder()
