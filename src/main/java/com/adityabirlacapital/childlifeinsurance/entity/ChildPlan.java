@@ -41,19 +41,19 @@ public class ChildPlan {
 	private Double goalAmt;
 	
 	@Column(name="goalTenure")
-	private Integer goalTenure;
+	private Double goalTenure;
 	
 	@Column(name="expensesFinal")
-	private Double expensesFinal;
+	private Long expensesFinal;
 
 	@Column(name="roi")
-	private Integer roi;
+	private Double roi;
 
 	@Column(name="saveAmount")
-	private Double saveAmount;
+	private Long saveAmount;
 
 	@Column(name="tenure")
-	private Integer tenure;
+	private Double tenure;
 
 	@Column(name = "createdBy")
 	private String createdBy;
@@ -69,8 +69,8 @@ public class ChildPlan {
 	@CreatedDate
 	private LocalDateTime createdDate;
 	
-	@Column(name="active")
-	boolean active;
+	@Column(name="active",columnDefinition = "boolean default true")
+	boolean active = true;
 
 	
 }

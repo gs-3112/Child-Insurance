@@ -1,7 +1,7 @@
 package com.adityabirlacapital.childlifeinsurance.rest;
 
 import com.adityabirlacapital.childlifeinsurance.service.ChildPlanService;
-import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDeatils;
+import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDetails;
 import com.adityabirlacapital.childlifeinsurance.dto.ResponseToAddChildPlanDetails;
 import com.adityabirlacapital.childlifeinsurance.dto.ResponseToGetChildPlanDetails;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -36,7 +36,7 @@ public class ChildPlanControllerTest {
     @Test
     public void testAddChildLifeInsuranceDetails() throws Exception {
         // Set up the request object
-        RequestToAddChildPlanDeatils request = objectMapper.readValue(getClass().getResourceAsStream("/json/RequestToAddChildPlanDetails.json"),RequestToAddChildPlanDeatils.class);
+        RequestToAddChildPlanDetails request = objectMapper.readValue(getClass().getResourceAsStream("/json/RequestToAddChildPlanDetails.json"), RequestToAddChildPlanDetails.class);
 
         // Set up the expected response object
         ResponseToAddChildPlanDetails expectedResponse = objectMapper.readValue(getClass().getResourceAsStream("/json/ResponseToAddChildPlanDetails.json"),ResponseToAddChildPlanDetails.class);
@@ -52,8 +52,8 @@ public class ChildPlanControllerTest {
 
     @Test
     public void testAddChildLifeInsuranceDetails_BadRequest() throws Exception {
-        RequestToAddChildPlanDeatils request = new RequestToAddChildPlanDeatils();
-        when(childPlanService.saveChildPlanDetails(any(RequestToAddChildPlanDeatils.class))).thenReturn(null);
+        RequestToAddChildPlanDetails request = new RequestToAddChildPlanDetails();
+        when(childPlanService.saveChildPlanDetails(any(RequestToAddChildPlanDetails.class))).thenReturn(null);
         mockMvc.perform(MockMvcRequestBuilders.post("/oneappabc/adityabirla/api/v1/lifeinsurance/badrequest")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))

@@ -4,7 +4,7 @@
 package com.adityabirlacapital.childlifeinsurance.rest;
 
 import com.adityabirlacapital.childlifeinsurance.service.ChildPlanService;
-import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDeatils;
+import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDetails;
 import com.adityabirlacapital.childlifeinsurance.dto.ResponseToAddChildPlanDetails;
 import com.adityabirlacapital.childlifeinsurance.dto.ResponseToGetChildPlanDetails;
 import jakarta.validation.Valid;
@@ -30,7 +30,7 @@ public class ChildPlanController {
     private Validator validator;
 
     @PostMapping
-    public ResponseEntity<ResponseToAddChildPlanDetails> addChildLifeInsuranceDetails(@Valid @RequestBody RequestToAddChildPlanDeatils request) {
+    public ResponseEntity<ResponseToAddChildPlanDetails> addChildLifeInsuranceDetails(@Valid @RequestBody RequestToAddChildPlanDetails request) {
         ResponseToAddChildPlanDetails response = childPlanService.saveChildPlanDetails(request);
         return new ResponseEntity<ResponseToAddChildPlanDetails>(response, HttpStatus.CREATED);
     }

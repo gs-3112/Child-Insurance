@@ -17,16 +17,16 @@ public class ResponseToGetChildPlanDetails {
     private Integer childAge;
     private String goalType;
     private Double goalAmt;
-    private Integer goalTenure;
-    private Integer tenure;
-    private Integer roi;
+    private Double goalTenure;
+    private Double tenure;
+    private Double roi;
     private String createdBy;
     private String modifiedBy;
     private LocalDateTime modifiedDate;
     private LocalDateTime createdDate;
     private Integer liChildId;
-    private Double expensesFinal;
-    private Double saveAmount;
+    private Long expensesFinal;
+    private Long saveAmount;
     private Boolean active;
 
 }

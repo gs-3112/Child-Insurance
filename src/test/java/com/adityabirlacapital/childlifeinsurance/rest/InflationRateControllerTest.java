@@ -11,6 +11,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import static org.hamcrest.Matchers.aMapWithSize;
 import static org.hamcrest.Matchers.is;
@@ -42,12 +44,22 @@ public class InflationRateControllerTest {
     @Test
     public void tesGetInflationRate() throws Exception {
         InflationRateResponse inflationRateResponse1 = InflationRateResponse.builder()
-                .inflationRateId(1)
                 .inflationRate(4)
+                .inflationRateId(1)
+                .createdBy("Admin")
+                .modifiedBy("Admin")
+                .createdDate(LocalDateTime.now())
+                .modifiedDate(LocalDateTime.now())
+                .active(true)
                 .build();
         InflationRateResponse inflationRateResponse2 = InflationRateResponse.builder()
-                .inflationRateId(2)
                 .inflationRate(6)
+                .inflationRateId(2)
+                .createdBy("Admin")
+                .modifiedBy("Admin")
+                .createdDate(LocalDateTime.now())
+                .modifiedDate(LocalDateTime.now())
+                .active(true)
                 .build();
 
         given(inflationRateService.getInflationRates()).willReturn(List.of(inflationRateResponse1,inflationRateResponse2));
@@ -60,12 +72,22 @@ public class InflationRateControllerTest {
     @Test
     public void testGetInflationRateBadRequest() throws Exception {
         InflationRateResponse inflationRateResponse1 = InflationRateResponse.builder()
-                .inflationRateId(1)
                 .inflationRate(4)
+                .inflationRateId(1)
+                .createdBy("Admin")
+                .modifiedBy("Admin")
+                .createdDate(LocalDateTime.now())
+                .modifiedDate(LocalDateTime.now())
+                .active(true)
                 .build();
         InflationRateResponse inflationRateResponse2 = InflationRateResponse.builder()
-                .inflationRateId(2)
                 .inflationRate(6)
+                .inflationRateId(2)
+                .createdBy("Admin")
+                .modifiedBy("Admin")
+                .createdDate(LocalDateTime.now())
+                .modifiedDate(LocalDateTime.now())
+                .active(true)
                 .build();
 
         given(inflationRateService.getInflationRates()).willReturn(List.of(inflationRateResponse1,inflationRateResponse2));
@@ -78,6 +100,11 @@ public class InflationRateControllerTest {
         InflationRateResponse inflationRateResponse = InflationRateResponse.builder()
                 .inflationRate(4)
                 .inflationRateId(1)
+                .createdBy("Admin")
+                .modifiedBy("Admin")
+                .createdDate(LocalDateTime.now())
+                .modifiedDate(LocalDateTime.now())
+                .active(true)
                 .build();
 
         RequestToAddInflationRate request = RequestToAddInflationRate.builder()
@@ -86,7 +113,7 @@ public class InflationRateControllerTest {
         mockMvc.perform(post("/oneappabc/adityabirla/api/v1/inflationrate")
                         .contentType(APPLICATION_JSON).content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$", aMapWithSize(2)))
+                .andExpect(jsonPath("$", aMapWithSize(7)))
                 .andDo(print());
     }
 
@@ -95,6 +122,11 @@ public class InflationRateControllerTest {
         InflationRateResponse inflationRateResponse = InflationRateResponse.builder()
                 .inflationRate(4)
                 .inflationRateId(1)
+                .createdBy("Admin")
+                .modifiedBy("Admin")
+                .createdDate(LocalDateTime.now())
+                .modifiedDate(LocalDateTime.now())
+                .active(true)
                 .build();
 
         RequestToAddInflationRate request = RequestToAddInflationRate.builder()

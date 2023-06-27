@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Data
 @Builder
-public class RequestToAddChildPlanDeatils {
+public class RequestToAddChildPlanDetails {
 
 	@NotNull(message = "should not be null")
 	private Long customerId;
@@ -21,17 +21,13 @@ public class RequestToAddChildPlanDeatils {
 	@NotNull(message = "should not be null")
 	private Double goalAmt;
 	@NotNull(message = "should not be null")
-	private Integer goalTenure;
+	private Double goalTenure;
 	@NotNull(message = "should not be null")
-	private Integer tenure;
+	private Double tenure;
 	@NotNull(message = "should not be null")
-	private Integer roi;
+	private Double roi;
 	@NotBlank(message = "should not be blank")
 	private String createdBy;
 	@NotBlank(message = "should not be blank")
 	private String modifiedBy;
-	@NotNull(message = "should not be null")
-	private Double expensesFinal;
-	@NotNull(message = "should not be null")
-	private Double saveAmount;
 }

@@ -5,11 +5,10 @@ package com.adityabirlacapital.childlifeinsurance.mapper;
 
 import com.adityabirlacapital.childlifeinsurance.entity.ChildPlan;
 import com.adityabirlacapital.childlifeinsurance.entity.Customer;
-import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDeatils;
+import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDetails;
 import com.adityabirlacapital.childlifeinsurance.dto.ResponseToAddChildPlanDetails;
 import com.adityabirlacapital.childlifeinsurance.dto.ResponseToGetChildPlanDetails;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ public class ChildPlanEntityMapper {
 	/*
 	 * convert to request object to child plan entity
 	 */
-	public ChildPlan mapToChildPlanEntity(RequestToAddChildPlanDeatils request) {
+	public ChildPlan mapToChildPlanEntity(RequestToAddChildPlanDetails request) {
 		Customer customer = Customer.builder()
 				.id(request.getCustomerId())
 				.build();
@@ -42,8 +41,6 @@ public class ChildPlanEntityMapper {
 				.modifiedBy(request.getModifiedBy())
 				.createdDate(LocalDateTime.now())
 				.modifiedDate(LocalDateTime.now())
-				.expensesFinal(request.getExpensesFinal())
-				.saveAmount(request.getSaveAmount())
 				.build();
 		return childPlan;
 	}
@@ -63,8 +60,8 @@ public class ChildPlanEntityMapper {
 				.goalTenure(childPlan.getGoalTenure())
 				.roi(childPlan.getRoi())
 				.tenure(childPlan.getTenure())
-				.saveAmount(childPlan.getSaveAmount())
 				.expensesFinal(childPlan.getExpensesFinal())
+				.saveAmount(childPlan.getSaveAmount())
 				.createdBy(childPlan.getCreatedBy())
 				.modifiedBy(childPlan.getModifiedBy())
 				.createdDate(LocalDateTime.now())
@@ -85,8 +82,8 @@ public class ChildPlanEntityMapper {
 				.goalTenure(childPlan.getGoalTenure())
 				.roi(childPlan.getRoi())
 				.tenure(childPlan.getTenure())
-				.saveAmount(childPlan.getSaveAmount())
 				.expensesFinal(childPlan.getExpensesFinal())
+				.saveAmount(childPlan.getSaveAmount())
 				.createdBy(childPlan.getCreatedBy())
 				.modifiedBy(childPlan.getModifiedBy())
 				.createdDate(LocalDateTime.now())
@@ -96,7 +93,7 @@ public class ChildPlanEntityMapper {
 		return response;
 	}
 
-	public List<ResponseToGetChildPlanDetails> mapToGetChildPlanEntity(List<ChildPlan> list) {
+	public List<ResponseToGetChildPlanDetails> mapToGetChildPlanResponse(List<ChildPlan> list) {
 		List<ResponseToGetChildPlanDetails> responseList = new ArrayList<>();
 		for (ChildPlan entity:list) {
 			responseList.add(mapToGetChildPlanResponse(entity));

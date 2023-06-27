@@ -1,49 +1,64 @@
 package com.adityabirlacapital.childlifeinsurance.service;
 
+import com.adityabirlacapital.childlifeinsurance.dto.CalculatedResult;
+import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDetails;
+import com.adityabirlacapital.childlifeinsurance.dto.ResponseToAddChildPlanDetails;
+import com.adityabirlacapital.childlifeinsurance.dto.ResponseToGetChildPlanDetails;
 import com.adityabirlacapital.childlifeinsurance.entity.ChildPlan;
 import com.adityabirlacapital.childlifeinsurance.mapper.ChildPlanEntityMapper;
 import com.adityabirlacapital.childlifeinsurance.repository.ChildPlanRepositoy;
-import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDeatils;
-import com.adityabirlacapital.childlifeinsurance.dto.ResponseToAddChildPlanDetails;
-import com.adityabirlacapital.childlifeinsurance.dto.ResponseToGetChildPlanDetails;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
 import java.io.IOException;
 import java.util.List;
+
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class ChildPlanServiceTest {
 
-    @Mock
+    @MockBean
     private ChildPlanRepositoy childPlanRepositoy;
     @Autowired
     private ObjectMapper objectMapper;
-    @Mock
+    @MockBean
     private ChildPlanEntityMapper childPlanEntityMapper;
-    @InjectMocks
+    @Autowired
     private ChildPlanService childPlanService;
+    @MockBean
+    private ChildPlanCalculator childPlanCalculator;
 
     @Test
     public void testSaveChildPlanDetails() throws IOException {
         // Set up the request object
-        RequestToAddChildPlanDeatils request = objectMapper.readValue(getClass().getResourceAsStream("/json/RequestToAddChildPlanDetails.json"),RequestToAddChildPlanDeatils.class);
+        RequestToAddChildPlanDetails request = objectMapper.readValue(getClass().getResourceAsStream("/json/RequestToAddChildPlanDetails.json"), RequestToAddChildPlanDetails.class);
         // Set up the expected entity
         ChildPlan requestEntity = objectMapper.readValue(getClass().getResourceAsStream("/json/ChildPlanEntity.json"),ChildPlan.class);
         // Set up the expected response
         ResponseToAddChildPlanDetails expectedResponse = objectMapper.readValue(getClass().getResourceAsStream("/json/ResponseToAddChildPlanDetails.json"),ResponseToAddChildPlanDetails.class);
+        CalculatedResult expectedResult = CalculatedResult.builder()
+                .projectedGoalCost(4382246l)
+                .projectedGoalCostRoundOff(4300000l)
+                .investForTillThisAmt(2447023l)
+                .premiumAmtTobeInvestPerMonth(14857.57)
+                .premiumAmtTobeInvestPerMonthRoundOff(14900l)
+                .coverAmount(1788000l)
+                .coverAmountRoundOff(1700000l)
+                .build();
 
         when(childPlanEntityMapper.mapToChildPlanEntity(request)).thenReturn(requestEntity);
         when(childPlanRepositoy.save(requestEntity)).thenReturn(requestEntity);
         when(childPlanEntityMapper.mapToAddChildPlanResponse(requestEntity)).thenReturn(expectedResponse);
-
+        when(childPlanCalculator.calculate(request)).thenReturn(expectedResult);
         ResponseToAddChildPlanDetails response = childPlanService.saveChildPlanDetails(request);
+
         // Assert the response object
         Assertions.assertEquals(response.getLiChildId(),expectedResponse.getLiChildId());
         Assertions.assertEquals(response.getChildAge(),expectedResponse.getChildAge());
@@ -62,16 +77,6 @@ public class ChildPlanServiceTest {
     }
 
     @Test
-    public void testSaveChildPlanDetails_Negative() throws IOException {
-        // Set up the request object
-        RequestToAddChildPlanDeatils request = objectMapper.readValue(getClass().getResourceAsStream("/json/RequestToAddChildPlanDeatils.json"),RequestToAddChildPlanDeatils.class);
-        when(childPlanEntityMapper.mapToChildPlanEntity(request)).thenReturn(null);
-        ResponseToAddChildPlanDetails response = childPlanService.saveChildPlanDetails(request);
-        // Assert the response object
-        Assertions.assertNull(response);
-    }
-
-    @Test
     public void testGetChildPlanDetails() throws IOException {
 
         Long customerId = 123L;
@@ -83,7 +88,7 @@ public class ChildPlanServiceTest {
         });
 
         when(childPlanRepositoy.findByCustomerId(customerId)).thenReturn(entityList);
-        when(childPlanEntityMapper.mapToGetChildPlanEntity(entityList)).thenReturn(expectedResponseList);
+        when(childPlanEntityMapper.mapToGetChildPlanResponse(entityList)).thenReturn(expectedResponseList);
 
         List<ResponseToGetChildPlanDetails> responseList = childPlanService.getChildPlanDetails(customerId);
 

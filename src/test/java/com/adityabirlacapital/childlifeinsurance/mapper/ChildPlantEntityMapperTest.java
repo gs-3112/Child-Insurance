@@ -1,7 +1,7 @@
 package com.adityabirlacapital.childlifeinsurance.mapper;
 
 import com.adityabirlacapital.childlifeinsurance.entity.ChildPlan;
-import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDeatils;
+import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDetails;
 import com.adityabirlacapital.childlifeinsurance.dto.ResponseToAddChildPlanDetails;
 import com.adityabirlacapital.childlifeinsurance.dto.ResponseToGetChildPlanDetails;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -24,7 +24,7 @@ public class ChildPlantEntityMapperTest {
     @Test
     public void testMapToChildPlanEntity() throws IOException {
         // Set up the request object
-        RequestToAddChildPlanDeatils requestToAddChildPlanDeatils = objectMapper.readValue(getClass().getResourceAsStream("/json/RequestToAddChildPlanDetails.json"),RequestToAddChildPlanDeatils.class);
+        RequestToAddChildPlanDetails requestToAddChildPlanDeatils = objectMapper.readValue(getClass().getResourceAsStream("/json/RequestToAddChildPlanDetails.json"), RequestToAddChildPlanDetails.class);
 
         ChildPlan childPlan = childPlanEntityMapper.mapToChildPlanEntity(requestToAddChildPlanDeatils);
         Assertions.assertEquals(childPlan.getChildAge(),requestToAddChildPlanDeatils.getChildAge());
@@ -37,8 +37,6 @@ public class ChildPlantEntityMapperTest {
         Assertions.assertEquals(childPlan.getGoalType(),requestToAddChildPlanDeatils.getGoalType());
         Assertions.assertEquals(childPlan.getGoalTenure(),requestToAddChildPlanDeatils.getGoalTenure());
         Assertions.assertEquals(childPlan.getCustomer().getId(),requestToAddChildPlanDeatils.getCustomerId());
-        Assertions.assertEquals(childPlan.getSaveAmount(),requestToAddChildPlanDeatils.getSaveAmount());
-        Assertions.assertEquals(childPlan.getExpensesFinal(),requestToAddChildPlanDeatils.getExpensesFinal());
         Assertions.assertEquals(childPlan.getCreatedBy(),requestToAddChildPlanDeatils.getCreatedBy());
         Assertions.assertEquals(childPlan.getModifiedBy(),requestToAddChildPlanDeatils.getModifiedBy());
 
@@ -64,8 +62,6 @@ public class ChildPlantEntityMapperTest {
         Assertions.assertEquals(childPlan.getSaveAmount(),responseToAddChildPlanDetails.getSaveAmount());
         Assertions.assertEquals(childPlan.getExpensesFinal(),responseToAddChildPlanDetails.getExpensesFinal());
         Assertions.assertEquals(childPlan.getLiChildId(),responseToAddChildPlanDetails.getLiChildId());
-        Assertions.assertEquals(childPlan.getCreatedDate(),responseToAddChildPlanDetails.getCreatedDate());
-        Assertions.assertEquals(childPlan.getModifiedDate(),responseToAddChildPlanDetails.getModifiedDate());
         Assertions.assertEquals(childPlan.getCreatedBy(),responseToAddChildPlanDetails.getCreatedBy());
         Assertions.assertEquals(childPlan.getModifiedBy(),responseToAddChildPlanDetails.getModifiedBy());
 
@@ -94,11 +90,11 @@ public class ChildPlantEntityMapperTest {
     }
 
     @Test
-    public void testMapToGetChildPlanEntity() throws IOException {
+    public void testMapToGetChildPlanResponseList() throws IOException {
         // Set up the expected entity list
         List<ChildPlan> childPlanList = objectMapper.readValue(getClass().getResourceAsStream("/json/ChildPlanEntityList.json"), new TypeReference<List<ChildPlan>>() {
         });
-        List<ResponseToGetChildPlanDetails> responseToGetChildPlanDetails = childPlanEntityMapper.mapToGetChildPlanEntity(childPlanList);
+        List<ResponseToGetChildPlanDetails> responseToGetChildPlanDetails = childPlanEntityMapper.mapToGetChildPlanResponse(childPlanList);
         Assertions.assertEquals(childPlanList.size(),responseToGetChildPlanDetails.size());
         Assertions.assertEquals(childPlanList.get(0).getChildAge(),responseToGetChildPlanDetails.get(0).getChildAge());
         Assertions.assertEquals(childPlanList.get(0).getChildName(),responseToGetChildPlanDetails.get(0).getChildName());

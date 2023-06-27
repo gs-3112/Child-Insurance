@@ -3,12 +3,13 @@
  */
 package com.adityabirlacapital.childlifeinsurance.service;
 
+import com.adityabirlacapital.childlifeinsurance.dto.CalculatedResult;
+import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDetails;
+import com.adityabirlacapital.childlifeinsurance.dto.ResponseToAddChildPlanDetails;
+import com.adityabirlacapital.childlifeinsurance.dto.ResponseToGetChildPlanDetails;
 import com.adityabirlacapital.childlifeinsurance.entity.ChildPlan;
 import com.adityabirlacapital.childlifeinsurance.mapper.ChildPlanEntityMapper;
 import com.adityabirlacapital.childlifeinsurance.repository.ChildPlanRepositoy;
-import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDeatils;
-import com.adityabirlacapital.childlifeinsurance.dto.ResponseToAddChildPlanDetails;
-import com.adityabirlacapital.childlifeinsurance.dto.ResponseToGetChildPlanDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +25,15 @@ public class ChildPlanService {
 	private ChildPlanRepositoy childPlanRepositoy;
 	@Autowired
 	private ChildPlanEntityMapper childPlanEntityMapper;
+	@Autowired
+	private ChildPlanCalculator childPlanCalculator;
 	
-	public ResponseToAddChildPlanDetails saveChildPlanDetails(RequestToAddChildPlanDeatils request) {
+	public ResponseToAddChildPlanDetails saveChildPlanDetails(RequestToAddChildPlanDetails request) {
 		ChildPlan requestEntity = childPlanEntityMapper.mapToChildPlanEntity(request);
+		CalculatedResult result = childPlanCalculator.calculate(request);
 		// Calculator will calculate these values.
-//		requestEntity.setSaveAmount(10000d);
-//		requestEntity.setExpensesFinal(3000d);
+		requestEntity.setSaveAmount(result.getPremiumAmtTobeInvestPerMonthRoundOff());
+		requestEntity.setExpensesFinal(result.getCoverAmountRoundOff());
 		ChildPlan savedEntity = childPlanRepositoy.save(requestEntity);
 		ResponseToAddChildPlanDetails response = childPlanEntityMapper.mapToAddChildPlanResponse((savedEntity));
 		return response;
@@ -37,7 +41,7 @@ public class ChildPlanService {
 
     public List<ResponseToGetChildPlanDetails> getChildPlanDetails(Long customerId) {
 		List<ChildPlan> entityList = childPlanRepositoy.findByCustomerId(customerId);
-		List<ResponseToGetChildPlanDetails> responseList = childPlanEntityMapper.mapToGetChildPlanEntity(entityList);
+		List<ResponseToGetChildPlanDetails> responseList = childPlanEntityMapper.mapToGetChildPlanResponse(entityList);
 		return responseList;
     }
 }
