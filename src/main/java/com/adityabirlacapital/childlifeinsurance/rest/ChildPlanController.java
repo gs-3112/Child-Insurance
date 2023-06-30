@@ -7,7 +7,6 @@ import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDetail
 import com.adityabirlacapital.childlifeinsurance.dto.ResponseHandler;
 import com.adityabirlacapital.childlifeinsurance.dto.ResponseToAddChildPlanDetails;
 import com.adityabirlacapital.childlifeinsurance.dto.ResponseToGetChildPlanDetails;
-import com.adityabirlacapital.childlifeinsurance.entity.ChildPlan;
 import com.adityabirlacapital.childlifeinsurance.service.ChildPlanService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

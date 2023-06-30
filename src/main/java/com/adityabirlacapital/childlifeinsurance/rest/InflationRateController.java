@@ -3,11 +3,10 @@
  */
 package com.adityabirlacapital.childlifeinsurance.rest;
 
-import com.adityabirlacapital.childlifeinsurance.dto.ResponseHandler;
-import com.adityabirlacapital.childlifeinsurance.entity.InflationRate;
-import com.adityabirlacapital.childlifeinsurance.service.InflationRateService;
 import com.adityabirlacapital.childlifeinsurance.dto.InflationRateResponse;
 import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddInflationRate;
+import com.adityabirlacapital.childlifeinsurance.dto.ResponseHandler;
+import com.adityabirlacapital.childlifeinsurance.service.InflationRateService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
