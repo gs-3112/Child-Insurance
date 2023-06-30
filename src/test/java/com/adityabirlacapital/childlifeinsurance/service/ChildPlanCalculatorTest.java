@@ -15,24 +15,23 @@ public class ChildPlanCalculatorTest {
 
     @Test
     public void calculateTest(){
-        CalculatedResult expectedResult = CalculatedResult.builder()
-                .projectedGoalCost(4382246l)
-                .projectedGoalCostRoundOff(4300000l)
-                .investForTillThisAmt(2447023l)
-                .premiumAmtTobeInvestPerMonth(14857.57)
-                .premiumAmtTobeInvestPerMonthRoundOff(14900l)
-                .coverAmount(1788000l)
-                .coverAmountRoundOff(1700000l)
-                .build();
+        CalculatedResult expectedResult = new CalculatedResult();
+        expectedResult.setProjectedGoalCost(4382246l);
+        expectedResult.setProjectedGoalCostRoundOff(4300000l);
+        expectedResult.setInvestForTillThisAmt(2447023l);
+        expectedResult.setPremiumAmtTobeInvestPerMonth(14857.57);
+        expectedResult.setPremiumAmtTobeInvestPerMonthRoundOff(14900l);
+        expectedResult.setCoverAmount(1788000l);
+        expectedResult.setCoverAmountRoundOff(1700000l);
 
-        RequestToAddChildPlanDetails request = RequestToAddChildPlanDetails.builder()
-                .goalAmt(2000000d)
-                .goalTenure(20d)
-                .tenure(10d)
-                .roi(4d)
-                .build();
+        RequestToAddChildPlanDetails request = new RequestToAddChildPlanDetails();
+        request.setGoalAmt(2000000d);
+        request.setGoalTenure(20d);
+        request.setTenure(10d);
+        request.setRoi(4d);
+
         CalculatedResult result = childPlanCalculator.calculate(request);
-        System.out.println(result.toString());
+
         Assertions.assertEquals(result.getProjectedGoalCost(),expectedResult.getProjectedGoalCost());
         Assertions.assertEquals(result.getProjectedGoalCostRoundOff(),expectedResult.getProjectedGoalCostRoundOff());
         Assertions.assertEquals(result.getInvestForTillThisAmt(),expectedResult.getInvestForTillThisAmt());

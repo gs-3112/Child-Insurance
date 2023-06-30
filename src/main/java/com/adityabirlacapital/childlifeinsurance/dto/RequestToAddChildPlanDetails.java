@@ -5,29 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
-@Builder
-public class RequestToAddChildPlanDetails {
+public class RequestToAddChildPlanDetails extends ChildPlanDetailsRequest{
 
-	@NotNull(message = "should not be null")
-	private Long customerId;
-	@NotBlank(message = "should not be blank")
-	private String childName;
-	@NotNull(message = "should not be null")
-	private Integer childAge;
-	@NotBlank(message = "should not be blank")
-	private String goalType;
-	@NotNull(message = "should not be null")
-	private Double goalAmt;
-	@NotNull(message = "should not be null")
-	private Double goalTenure;
-	@NotNull(message = "should not be null")
-	private Double tenure;
-	@NotNull(message = "should not be null")
-	private Double roi;
-	@NotBlank(message = "should not be blank")
-	private String createdBy;
-	@NotBlank(message = "should not be blank")
-	private String modifiedBy;
 }

@@ -43,24 +43,23 @@ public class InflationRateControllerTest {
 
     @Test
     public void tesGetInflationRate() throws Exception {
-        InflationRateResponse inflationRateResponse1 = InflationRateResponse.builder()
-                .inflationRate(4)
-                .inflationRateId(1)
-                .createdBy("Admin")
-                .modifiedBy("Admin")
-                .createdDate(LocalDateTime.now())
-                .modifiedDate(LocalDateTime.now())
-                .active(true)
-                .build();
-        InflationRateResponse inflationRateResponse2 = InflationRateResponse.builder()
-                .inflationRate(6)
-                .inflationRateId(2)
-                .createdBy("Admin")
-                .modifiedBy("Admin")
-                .createdDate(LocalDateTime.now())
-                .modifiedDate(LocalDateTime.now())
-                .active(true)
-                .build();
+        InflationRateResponse inflationRateResponse1 = new InflationRateResponse();
+        inflationRateResponse1.setInflationRate(4);
+        inflationRateResponse1.setInflationRateId(1);
+        inflationRateResponse1.setCreatedBy("Admin");
+        inflationRateResponse1.setModifiedBy("Admin");
+        inflationRateResponse1.setCreatedDate(LocalDateTime.now());
+        inflationRateResponse1.setModifiedDate(LocalDateTime.now());
+        inflationRateResponse1.setActive(true);
+
+        InflationRateResponse inflationRateResponse2 = new InflationRateResponse();
+        inflationRateResponse2.setInflationRate(6);
+        inflationRateResponse2.setInflationRate(2);
+        inflationRateResponse2.setCreatedBy("Admin");
+        inflationRateResponse2.setModifiedBy("Admin");
+        inflationRateResponse2.setCreatedDate(LocalDateTime.now());
+        inflationRateResponse2.setModifiedDate(LocalDateTime.now());
+        inflationRateResponse2.setActive(true);
 
         given(inflationRateService.getInflationRates()).willReturn(List.of(inflationRateResponse1,inflationRateResponse2));
         mockMvc.perform(get("/oneappabc/adityabirla/api/v1/inflationrate")
@@ -71,24 +70,23 @@ public class InflationRateControllerTest {
     }
     @Test
     public void testGetInflationRateBadRequest() throws Exception {
-        InflationRateResponse inflationRateResponse1 = InflationRateResponse.builder()
-                .inflationRate(4)
-                .inflationRateId(1)
-                .createdBy("Admin")
-                .modifiedBy("Admin")
-                .createdDate(LocalDateTime.now())
-                .modifiedDate(LocalDateTime.now())
-                .active(true)
-                .build();
-        InflationRateResponse inflationRateResponse2 = InflationRateResponse.builder()
-                .inflationRate(6)
-                .inflationRateId(2)
-                .createdBy("Admin")
-                .modifiedBy("Admin")
-                .createdDate(LocalDateTime.now())
-                .modifiedDate(LocalDateTime.now())
-                .active(true)
-                .build();
+        InflationRateResponse inflationRateResponse1 = new InflationRateResponse();
+        inflationRateResponse1.setInflationRate(4);
+        inflationRateResponse1.setInflationRateId(1);
+        inflationRateResponse1.setCreatedBy("Admin");
+        inflationRateResponse1.setModifiedBy("Admin");
+        inflationRateResponse1.setCreatedDate(LocalDateTime.now());
+        inflationRateResponse1.setModifiedDate(LocalDateTime.now());
+        inflationRateResponse1.setActive(true);
+
+        InflationRateResponse inflationRateResponse2 = new InflationRateResponse();
+        inflationRateResponse2.setInflationRate(6);
+        inflationRateResponse2.setInflationRate(2);
+        inflationRateResponse2.setCreatedBy("Admin");
+        inflationRateResponse2.setModifiedBy("Admin");
+        inflationRateResponse2.setCreatedDate(LocalDateTime.now());
+        inflationRateResponse2.setModifiedDate(LocalDateTime.now());
+        inflationRateResponse2.setActive(true);
 
         given(inflationRateService.getInflationRates()).willReturn(List.of(inflationRateResponse1,inflationRateResponse2));
         mockMvc.perform(get("/oneappabc/adityabirla/api/v1/badrequest")
@@ -97,18 +95,18 @@ public class InflationRateControllerTest {
          }
     @Test
     public void testAddInflationRate() throws Exception {
-        InflationRateResponse inflationRateResponse = InflationRateResponse.builder()
-                .inflationRate(4)
-                .inflationRateId(1)
-                .createdBy("Admin")
-                .modifiedBy("Admin")
-                .createdDate(LocalDateTime.now())
-                .modifiedDate(LocalDateTime.now())
-                .active(true)
-                .build();
+        InflationRateResponse inflationRateResponse = new InflationRateResponse();
+        inflationRateResponse.setInflationRate(4);
+        inflationRateResponse.setInflationRateId(1);
+        inflationRateResponse.setCreatedBy("Admin");
+        inflationRateResponse.setModifiedBy("Admin");
+        inflationRateResponse.setCreatedDate(LocalDateTime.now());
+        inflationRateResponse.setModifiedDate(LocalDateTime.now());
+        inflationRateResponse.setActive(true);
 
-        RequestToAddInflationRate request = RequestToAddInflationRate.builder()
-                        .inflationRate(4).build();
+        RequestToAddInflationRate request = new RequestToAddInflationRate();
+        request.setInflationRate(4);
+
         given(inflationRateService.addInflationRates(request)).willReturn(inflationRateResponse);
         mockMvc.perform(post("/oneappabc/adityabirla/api/v1/inflationrate")
                         .contentType(APPLICATION_JSON).content(objectMapper.writeValueAsString(request)))
@@ -119,18 +117,17 @@ public class InflationRateControllerTest {
 
     @Test
     public void testAddInflationRateBadRequest() throws Exception {
-        InflationRateResponse inflationRateResponse = InflationRateResponse.builder()
-                .inflationRate(4)
-                .inflationRateId(1)
-                .createdBy("Admin")
-                .modifiedBy("Admin")
-                .createdDate(LocalDateTime.now())
-                .modifiedDate(LocalDateTime.now())
-                .active(true)
-                .build();
+        InflationRateResponse inflationRateResponse = new InflationRateResponse();
+        inflationRateResponse.setInflationRate(4);
+        inflationRateResponse.setInflationRateId(1);
+        inflationRateResponse.setCreatedBy("Admin");
+        inflationRateResponse.setModifiedBy("Admin");
+        inflationRateResponse.setCreatedDate(LocalDateTime.now());
+        inflationRateResponse.setModifiedDate(LocalDateTime.now());
+        inflationRateResponse.setActive(true);
 
-        RequestToAddInflationRate request = RequestToAddInflationRate.builder()
-                .inflationRate(4).build();
+        RequestToAddInflationRate request = new RequestToAddInflationRate();
+        request.setInflationRate(4);
         given(inflationRateService.addInflationRates(request)).willReturn(inflationRateResponse);
         mockMvc.perform(post("/oneappabc/adityabirla/api/v1/badrequest")
                         .contentType(APPLICATION_JSON).content(objectMapper.writeValueAsString(request)))

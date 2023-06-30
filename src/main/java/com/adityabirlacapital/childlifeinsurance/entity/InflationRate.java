@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="T_LI_INFLATION_RATES")

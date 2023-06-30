@@ -21,20 +21,20 @@ public class ChildPlanCalculator {
         long coverAmount = 10 * (premiumRoundoff * 12);
         long coverAmountRoundOff = roundFloor(coverAmount);
         //---------------------------------------------------
-        return CalculatedResult.builder()
-                .projectedGoalCost(projected_goal_cost)
-                .projectedGoalCostRoundOff(projected)
-                .investForTillThisAmt(investfortillthisamt)
-                .premiumAmtTobeInvestPerMonth(useDiscounting)
-                .premiumAmtTobeInvestPerMonthRoundOff(premiumRoundoff)
-                .coverAmount(coverAmount)
-                .coverAmountRoundOff(coverAmountRoundOff)
-                .build();
+        CalculatedResult calculatedResult = new CalculatedResult();
+        calculatedResult.setProjectedGoalCost(projected_goal_cost);
+        calculatedResult.setProjectedGoalCostRoundOff(projected);
+        calculatedResult.setInvestForTillThisAmt(investfortillthisamt);
+        calculatedResult.setPremiumAmtTobeInvestPerMonth(useDiscounting);
+        calculatedResult.setPremiumAmtTobeInvestPerMonthRoundOff(premiumRoundoff);
+        calculatedResult.setCoverAmount(coverAmount);
+        calculatedResult.setCoverAmountRoundOff(coverAmountRoundOff);
+        return calculatedResult;
     }
 
     public static long roundFloor(double input) {
         long i = (long) Math.floor(input);
-        return ((i - 9999) / 100000) * 100000;
+        return ((i) / 100000) * 100000;
     }
 
     public long roundCeil(double input) {

@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="T_Child_Insurance")
@@ -22,7 +21,7 @@ public class ChildPlan {
 	@Id
 	@Column(name = "LIChildId")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer liChildId;
+	private Long liChildId;
 	
 	@JsonBackReference
 	@ManyToOne
@@ -72,5 +71,7 @@ public class ChildPlan {
 	@Column(name="active",columnDefinition = "boolean default true")
 	boolean active = true;
 
-	
+	@Column(name="isInterestedInPlan",columnDefinition = "boolean default false")
+	boolean isInterestedInPlan = false;
+
 }

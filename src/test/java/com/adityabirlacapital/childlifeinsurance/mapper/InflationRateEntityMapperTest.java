@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -15,21 +16,22 @@ public class InflationRateEntityMapperTest {
     @Autowired
     private InflationRateEntityMapper inflationRateEntityMapper;
 
-
     @Test
     public void testMapToInflationRateResponseList(){
-        List<InflationRate> entityList = List.of(InflationRate.builder()
-                .inflationRate(4)
-                .createdBy("Sagar")
-                .modifiedBy("Sagar")
-                .active(true)
-                .build(),
-        InflationRate.builder()
-                .inflationRate(6)
-                .createdBy("Aman")
-                .modifiedBy("Aman")
-                .active(true)
-                .build());
+        InflationRate inflationRate1 = new InflationRate();
+        inflationRate1.setInflationRate(4);
+        inflationRate1.setCreatedBy("Sagar");
+        inflationRate1.setModifiedBy("Sagar");
+        inflationRate1.setActive(true);
+
+        InflationRate inflationRate2 = new InflationRate();
+        inflationRate2.setInflationRate(6);
+        inflationRate2.setCreatedBy("Aman");
+        inflationRate2.setModifiedBy("Aman");
+        inflationRate2.setActive(true);
+
+        List<InflationRate> entityList = List.of(inflationRate1,inflationRate2);
+
         List<InflationRateResponse> responseList = inflationRateEntityMapper.mapToInflationRateResponse(entityList);
         Assertions.assertEquals(responseList.size(),entityList.size());
         Assertions.assertEquals(entityList.get(0).getInflationRate(),responseList.get(0).getInflationRate());
@@ -44,12 +46,12 @@ public class InflationRateEntityMapperTest {
     }
     @Test
     public void testMapToInflationRateResponse(){
-        InflationRate entity = InflationRate.builder()
-                .inflationRate(4)
-                .createdBy("Sagar")
-                .modifiedBy("Sagar")
-                .active(true)
-                .build();
+        InflationRate entity = new InflationRate();
+        entity.setInflationRate(4);
+        entity.setCreatedBy("Sagar");
+        entity.setModifiedBy("Sagar");
+        entity.setActive(true);
+
         InflationRateResponse response = inflationRateEntityMapper.mapToInflationRateResponse(entity);
         Assertions.assertEquals(entity.getInflationRate(),response.getInflationRate());
         Assertions.assertEquals(entity.getCreatedBy(),response.getCreatedBy());
@@ -59,11 +61,11 @@ public class InflationRateEntityMapperTest {
 
     @Test
     public void testMapToInflationRateEntity(){
-        RequestToAddInflationRate request = RequestToAddInflationRate.builder()
-                .inflationRate(4)
-                .createdBy("Sagar")
-                .modifiedBy("Sagar")
-                .build();
+
+        RequestToAddInflationRate request = new RequestToAddInflationRate();
+        request.setInflationRate(4);
+        request.setCreatedBy("Sagar");
+        request.setModifiedBy("Sagar");
         InflationRate inflationRate = inflationRateEntityMapper.mapToInflationRateEntity(request);
         Assertions.assertEquals(request.getInflationRate(),inflationRate.getInflationRate());
         Assertions.assertEquals(request.getCreatedBy(),inflationRate.getCreatedBy());

@@ -3,18 +3,18 @@
  */
 package com.adityabirlacapital.childlifeinsurance.rest;
 
-import com.adityabirlacapital.childlifeinsurance.service.ChildPlanService;
 import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDetails;
+import com.adityabirlacapital.childlifeinsurance.dto.ResponseHandler;
 import com.adityabirlacapital.childlifeinsurance.dto.ResponseToAddChildPlanDetails;
 import com.adityabirlacapital.childlifeinsurance.dto.ResponseToGetChildPlanDetails;
+import com.adityabirlacapital.childlifeinsurance.entity.ChildPlan;
+import com.adityabirlacapital.childlifeinsurance.service.ChildPlanService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 
@@ -26,18 +26,24 @@ import java.util.List;
 public class ChildPlanController {
     @Autowired
     private ChildPlanService childPlanService;
-    @Autowired
-    private Validator validator;
 
     @PostMapping
-    public ResponseEntity<ResponseToAddChildPlanDetails> addChildLifeInsuranceDetails(@Valid @RequestBody RequestToAddChildPlanDetails request) {
-        ResponseToAddChildPlanDetails response = childPlanService.saveChildPlanDetails(request);
-        return new ResponseEntity<ResponseToAddChildPlanDetails>(response, HttpStatus.CREATED);
+    public ResponseEntity<Object> addChildLifeInsuranceDetails(@Valid @RequestBody RequestToAddChildPlanDetails request) {
+        ChildPlan response = childPlanService.saveChildPlanDetails(request);
+        return new ResponseHandler().generateSuccessResponse(response,HttpStatus.CREATED,"Saved Successfully");
     }
 
     @GetMapping("/{customerId}")
-    public ResponseEntity<List<ResponseToGetChildPlanDetails>> getChildPlanDtails(@NotNull(message = "customerId should not be null") @PathVariable("customerId") Long customerId) {
-        List<ResponseToGetChildPlanDetails> responseList = childPlanService.getChildPlanDetails(customerId);
-        return new ResponseEntity<>(responseList, HttpStatus.OK);
+    public ResponseEntity<Object> getChildPlanDetails(@NotNull(message = "customerId should not be null") @PathVariable("customerId") Long customerId) {
+        List<ChildPlan> responseList = childPlanService.getChildPlanDetails(customerId);
+        return new ResponseHandler().generateSuccessResponse(responseList, HttpStatus.OK,"Success");
     }
+
+    @PatchMapping("/{childPlanId}")
+    public ResponseEntity<Object> patchChildPlanDetails(@PathVariable("childPlanId") Long childPlanId,@RequestParam("isInterestedInPlan") Boolean isInterestedInPlan) throws Exception {
+        Integer count = childPlanService.updateChildPlanDtails(childPlanId,isInterestedInPlan);
+        return new ResponseHandler().generateSuccessResponse(HttpStatus.OK,"Updated Successfully");
+    }
+
+
 }

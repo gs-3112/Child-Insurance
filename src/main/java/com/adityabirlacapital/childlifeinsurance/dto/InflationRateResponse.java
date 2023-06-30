@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
 public class InflationRateResponse {
 	private Integer inflationRateId;
 	private Integer inflationRate;

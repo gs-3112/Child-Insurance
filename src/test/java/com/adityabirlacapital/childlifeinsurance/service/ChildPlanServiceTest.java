@@ -15,7 +15,6 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -43,15 +42,15 @@ public class ChildPlanServiceTest {
         ChildPlan requestEntity = objectMapper.readValue(getClass().getResourceAsStream("/json/ChildPlanEntity.json"),ChildPlan.class);
         // Set up the expected response
         ResponseToAddChildPlanDetails expectedResponse = objectMapper.readValue(getClass().getResourceAsStream("/json/ResponseToAddChildPlanDetails.json"),ResponseToAddChildPlanDetails.class);
-        CalculatedResult expectedResult = CalculatedResult.builder()
-                .projectedGoalCost(4382246l)
-                .projectedGoalCostRoundOff(4300000l)
-                .investForTillThisAmt(2447023l)
-                .premiumAmtTobeInvestPerMonth(14857.57)
-                .premiumAmtTobeInvestPerMonthRoundOff(14900l)
-                .coverAmount(1788000l)
-                .coverAmountRoundOff(1700000l)
-                .build();
+
+        CalculatedResult expectedResult = new CalculatedResult();
+        expectedResult.setProjectedGoalCost(4382246l);
+        expectedResult.setProjectedGoalCostRoundOff(4300000l);
+        expectedResult.setInvestForTillThisAmt(2447023l);
+        expectedResult.setPremiumAmtTobeInvestPerMonth(14857.57);
+        expectedResult.setPremiumAmtTobeInvestPerMonthRoundOff(14900l);
+        expectedResult.setCoverAmount(1788000l);
+        expectedResult.setCoverAmountRoundOff(1700000l);
 
         when(childPlanEntityMapper.mapToChildPlanEntity(request)).thenReturn(requestEntity);
         when(childPlanRepositoy.save(requestEntity)).thenReturn(requestEntity);

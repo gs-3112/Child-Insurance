@@ -8,11 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@Component
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@AllArgsConstructor
 public class RequestToAddInflationRate {
     @NotNull(message = "should not be null")
     private Integer inflationRate;

@@ -7,7 +7,6 @@ import com.adityabirlacapital.childlifeinsurance.entity.InflationRate;
 import com.adityabirlacapital.childlifeinsurance.dto.InflationRateResponse;
 import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddInflationRate;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,26 +26,24 @@ public class InflationRateEntityMapper {
     }
 
     public InflationRateResponse mapToInflationRateResponse(InflationRate inflationRate) {
-        InflationRateResponse response = InflationRateResponse.builder()
-                .inflationRateId(inflationRate.getInflationRateId())
-                .inflationRate(inflationRate.getInflationRate())
-                .active(inflationRate.isActive())
-                .modifiedBy(inflationRate.getModifiedBy())
-                .createdBy(inflationRate.getCreatedBy())
-                .createdDate(inflationRate.getCreatedDate())
-                .modifiedDate(inflationRate.getModifiedDate())
-                .build();
+        InflationRateResponse response = new InflationRateResponse();
+        response.setInflationRateId(inflationRate.getInflationRateId());
+        response.setInflationRate(inflationRate.getInflationRate());
+        response.setActive(inflationRate.isActive());
+        response.setModifiedBy(inflationRate.getModifiedBy());
+        response.setCreatedBy(inflationRate.getCreatedBy());
+        response.setCreatedDate(inflationRate.getCreatedDate());
+        response.setModifiedDate(inflationRate.getModifiedDate());
         return response;
     }
 
     public InflationRate mapToInflationRateEntity(RequestToAddInflationRate request) {
-        InflationRate entity = InflationRate.builder()
-                .inflationRate(request.getInflationRate())
-                .createdBy(request.getCreatedBy())
-                .modifiedBy(request.getModifiedBy())
-                .createdDate(LocalDateTime.now())
-                .modifiedDate(LocalDateTime.now())
-                .build();
+        InflationRate entity = new InflationRate();
+        entity.setInflationRate(request.getInflationRate());
+        entity.setCreatedBy(request.getCreatedBy());
+        entity.setModifiedBy(request.getModifiedBy());
+        entity.setCreatedDate(LocalDateTime.now());
+        entity.setModifiedDate(LocalDateTime.now());
         return entity;
     }
 }

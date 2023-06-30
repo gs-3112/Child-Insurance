@@ -3,9 +3,12 @@
  */
 package com.adityabirlacapital.childlifeinsurance.rest;
 
+import com.adityabirlacapital.childlifeinsurance.dto.ResponseHandler;
+import com.adityabirlacapital.childlifeinsurance.entity.InflationRate;
 import com.adityabirlacapital.childlifeinsurance.service.InflationRateService;
 import com.adityabirlacapital.childlifeinsurance.dto.InflationRateResponse;
 import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddInflationRate;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +26,14 @@ public class InflationRateController {
 	private InflationRateService inflationRateService;
 	@GetMapping
 	@ResponseStatus(value = HttpStatus.OK)
-	public List<InflationRateResponse> getInflationRate() {
-		List<InflationRateResponse> list = inflationRateService.getInflationRates();
-		return list;
+	public ResponseEntity<Object> getInflationRate() {
+		List<InflationRate> list = inflationRateService.getInflationRates();
+		return new ResponseHandler().generateSuccessResponse(list,HttpStatus.OK,"Success");
 	}
 
 	@PostMapping
-	public ResponseEntity<InflationRateResponse> addInflationRate(@RequestBody RequestToAddInflationRate request) {
-		InflationRateResponse response = inflationRateService.addInflationRates(request);
-		return new ResponseEntity<>(response,HttpStatus.CREATED);
+	public ResponseEntity<Object> addInflationRate(@Valid @RequestBody RequestToAddInflationRate request) {
+		InflationRate response = inflationRateService.addInflationRates(request);
+		return new ResponseHandler().generateSuccessResponse(response,HttpStatus.CREATED,"Saved Successfully");
 	}
 }
