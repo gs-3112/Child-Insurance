@@ -7,17 +7,19 @@ import com.adityabirlacapital.childlifeinsurance.dto.*;
 import com.adityabirlacapital.childlifeinsurance.entity.ChildPlan;
 import com.adityabirlacapital.childlifeinsurance.mapper.ChildPlanEntityMapper;
 import com.adityabirlacapital.childlifeinsurance.repository.ChildPlanRepositoy;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Service processor for child plan 
  */
 @Service
+@Slf4j
 public class ChildPlanService {
 
     @Autowired
@@ -27,21 +29,31 @@ public class ChildPlanService {
     @Autowired
     private ChildPlanCalculator childPlanCalculator;
 
-    public ChildPlan saveChildPlanDetails(RequestToAddChildPlanDetails request) {
+    public ResponseToAddChildPlanDetails saveChildPlanDetails(RequestToAddChildPlanDetails request) {
         ChildPlan requestEntity = childPlanEntityMapper.mapToChildPlanEntity(request);
         CalculatedResult result = childPlanCalculator.calculate(request);
         // Calculator will calculate these values.
         requestEntity.setSaveAmount(result.getPremiumAmtTobeInvestPerMonthRoundOff());
         requestEntity.setExpensesFinal(result.getCoverAmountRoundOff());
-        ChildPlan savedEntity = childPlanRepositoy.save(requestEntity);
-//        ResponseToAddChildPlanDetails response = childPlanEntityMapper.mapToAddChildPlanResponse((savedEntity));
-        return savedEntity;
+        ChildPlan savedEntity = null;
+        ResponseToAddChildPlanDetails response = null;
+        try {
+            savedEntity = childPlanRepositoy.save(requestEntity);
+            response = childPlanEntityMapper.mapToAddChildPlanResponse((savedEntity));
+        }catch(DataIntegrityViolationException ex){
+            savedEntity = childPlanRepositoy.findByUniqueKey(request.getCustomerId(),request.getChildName(),request.getChildAge(),request.getGoalType(),request.getGoalAmt(),
+                    request.getGoalTenure(),request.getRoi(),request.getTenure(),request.getCreatedBy(),request.getModifiedBy());
+            log.info("Record already exist ");
+            response = childPlanEntityMapper.mapToAddChildPlanResponse((savedEntity));
+            response.setDuplicateRecord(true);
+        }
+        return response;
     }
 
-    public List<ChildPlan> getChildPlanDetails(Long customerId) {
+    public List<ResponseToGetChildPlanDetails> getChildPlanDetails(Long customerId) {
         List<ChildPlan> entityList = childPlanRepositoy.findByCustomerId(customerId);
-//        List<ResponseToGetChildPlanDetails> responseList = childPlanEntityMapper.mapToGetChildPlanResponse(entityList);
-        return entityList;
+        List<ResponseToGetChildPlanDetails> responseList = childPlanEntityMapper.mapToGetChildPlanResponse(entityList);
+        return responseList;
     }
 
     public Integer updateChildPlanDtails(Long childPlanId, Boolean isInterestedInPlan) {

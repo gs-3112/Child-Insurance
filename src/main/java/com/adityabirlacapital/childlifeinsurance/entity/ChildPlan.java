@@ -15,7 +15,10 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="T_Child_Insurance")
+//@Table(name="T_Child_Insurance")
+@Table(name="T_Child_Insurance",uniqueConstraints={
+		@UniqueConstraint(columnNames = {"customerId","childName", "childAge","goalType","goalAmt","goalTenure","expensesFinal","roi","saveAmount","tenure"})
+})
 public class ChildPlan {
 
 	@Id
@@ -25,6 +28,7 @@ public class ChildPlan {
 	
 	@JsonBackReference
 	@ManyToOne
+	@JoinColumn(name = "customerId")
 	Customer customer;
 	
 	@Column(name = "childName")

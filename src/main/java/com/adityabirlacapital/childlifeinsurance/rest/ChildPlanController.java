@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 
@@ -29,13 +30,13 @@ public class ChildPlanController {
 
     @PostMapping
     public ResponseEntity<Object> addChildLifeInsuranceDetails(@Valid @RequestBody RequestToAddChildPlanDetails request) {
-        ChildPlan response = childPlanService.saveChildPlanDetails(request);
-        return new ResponseHandler().generateSuccessResponse(response,HttpStatus.CREATED,"Saved Successfully");
+        ResponseToAddChildPlanDetails response = childPlanService.saveChildPlanDetails(request);
+        return new ResponseHandler().generateSuccessResponse(response,response.getDuplicateRecord()?HttpStatus.FOUND:HttpStatus.CREATED,response.getDuplicateRecord()?"Record already exist":"Saved Successfully");
     }
 
     @GetMapping("/{customerId}")
     public ResponseEntity<Object> getChildPlanDetails(@NotNull(message = "customerId should not be null") @PathVariable("customerId") Long customerId) {
-        List<ChildPlan> responseList = childPlanService.getChildPlanDetails(customerId);
+        List<ResponseToGetChildPlanDetails> responseList = childPlanService.getChildPlanDetails(customerId);
         return new ResponseHandler().generateSuccessResponse(responseList, HttpStatus.OK,"Success");
     }
 

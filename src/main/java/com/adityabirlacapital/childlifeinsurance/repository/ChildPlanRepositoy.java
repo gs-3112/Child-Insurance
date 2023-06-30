@@ -8,12 +8,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
-import java.util.Optional;
 
 /**
  * 
@@ -27,5 +23,9 @@ public interface ChildPlanRepositoy extends JpaRepository<ChildPlan, Long>{
     @Modifying(clearAutomatically = true)
     @Query("UPDATE ChildPlan c SET c.isInterestedInPlan =:isInterestedInPlan WHERE c.liChildId =:childPlanId")
     Integer updateIfInterestedInPlan(long childPlanId,Boolean isInterestedInPlan);
+
+    @Query("SELECT cp FROM ChildPlan cp WHERE cp.customer.id =:customerId AND cp.childName =:childName AND cp.childAge =:childAge AND cp.goalType =:goalType AND cp.goalAmt =:goalAmt AND cp.goalTenure =:goalTenure AND cp.roi =:roi AND cp.tenure =:tenure AND cp.createdBy =:createdBy AND cp.modifiedBy =:modifiedBy")
+    ChildPlan findByUniqueKey(Long customerId,String childName,Integer childAge,String goalType,Double goalAmt,
+                              Double goalTenure,Double roi,Double tenure,String createdBy,String modifiedBy);
 }
 

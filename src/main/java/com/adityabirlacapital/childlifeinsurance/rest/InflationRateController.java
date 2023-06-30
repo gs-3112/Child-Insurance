@@ -27,13 +27,13 @@ public class InflationRateController {
 	@GetMapping
 	@ResponseStatus(value = HttpStatus.OK)
 	public ResponseEntity<Object> getInflationRate() {
-		List<InflationRate> list = inflationRateService.getInflationRates();
+		List<InflationRateResponse> list = inflationRateService.getInflationRates();
 		return new ResponseHandler().generateSuccessResponse(list,HttpStatus.OK,"Success");
 	}
 
 	@PostMapping
 	public ResponseEntity<Object> addInflationRate(@Valid @RequestBody RequestToAddInflationRate request) {
-		InflationRate response = inflationRateService.addInflationRates(request);
+		InflationRateResponse response = inflationRateService.addInflationRates(request);
 		return new ResponseHandler().generateSuccessResponse(response,HttpStatus.CREATED,"Saved Successfully");
 	}
 }

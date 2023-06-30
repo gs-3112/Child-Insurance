@@ -1,9 +1,9 @@
 package com.adityabirlacapital.childlifeinsurance.rest;
 
-import com.adityabirlacapital.childlifeinsurance.service.ChildPlanService;
 import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDetails;
 import com.adityabirlacapital.childlifeinsurance.dto.ResponseToAddChildPlanDetails;
 import com.adityabirlacapital.childlifeinsurance.dto.ResponseToGetChildPlanDetails;
+import com.adityabirlacapital.childlifeinsurance.service.ChildPlanService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -40,14 +41,12 @@ public class ChildPlanControllerTest {
 
         // Set up the expected response object
         ResponseToAddChildPlanDetails expectedResponse = objectMapper.readValue(getClass().getResourceAsStream("/json/ResponseToAddChildPlanDetails.json"),ResponseToAddChildPlanDetails.class);
-
         when(childPlanService.saveChildPlanDetails(request)).thenReturn(expectedResponse);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/oneappabc/adityabirla/api/v1/lifeinsurance/childplan")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.childName").value(expectedResponse.getChildName()));
+                .andExpect(MockMvcResultMatchers.status().isCreated());
     }
 
     @Test

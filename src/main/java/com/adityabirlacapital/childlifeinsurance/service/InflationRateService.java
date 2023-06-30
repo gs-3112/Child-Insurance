@@ -23,14 +23,14 @@ public class InflationRateService {
 	@Autowired
 	private InflationRateEntityMapper mapper;
 	
-	public List<InflationRate> getInflationRates() {
-//		List<InflationRateResponse> list =  mapper.mapToInflationRateResponse(inflationRateRepository.findAll());
-		return inflationRateRepository.findAll();
+	public List<InflationRateResponse> getInflationRates() {
+		List<InflationRateResponse> list =  mapper.mapToInflationRateResponse(inflationRateRepository.findAll());
+		return list;
 	}
 
-	public InflationRate addInflationRates(RequestToAddInflationRate request) {
+	public InflationRateResponse addInflationRates(RequestToAddInflationRate request) {
 		InflationRate entity = mapper.mapToInflationRateEntity(request);
-//		InflationRateResponse response = mapper.mapToInflationRateResponse(inflationRateRepository.save(entity));
-		return inflationRateRepository.save(entity);
+		InflationRateResponse response = mapper.mapToInflationRateResponse(inflationRateRepository.save(entity));
+		return response;
 	}
 }
