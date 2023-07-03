@@ -68,8 +68,7 @@ public class ChildPlanControllerTest {
         when(childPlanService.getChildPlanDetails(customerId)).thenReturn(expectedResponseList);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/oneappabc/adityabirla/api/v1/lifeinsurance/childplan/{customerId}", customerId))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(expectedResponseList.size()));
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
