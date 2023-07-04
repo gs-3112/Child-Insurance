@@ -3,19 +3,17 @@
  */
 package com.adityabirlacapital.childlifeinsurance.rest;
 
-import com.adityabirlacapital.childlifeinsurance.dto.RequestToAddChildPlanDetails;
-import com.adityabirlacapital.childlifeinsurance.dto.ResponseHandler;
-import com.adityabirlacapital.childlifeinsurance.dto.ResponseToAddChildPlanDetails;
-import com.adityabirlacapital.childlifeinsurance.dto.ResponseToGetChildPlanDetails;
+import com.adityabirlacapital.childlifeinsurance.dto.*;
 import com.adityabirlacapital.childlifeinsurance.service.ChildPlanService;
+import com.adityabirlacapital.childlifeinsurance.util.Constants;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -30,20 +28,22 @@ public class ChildPlanController {
     @PostMapping
     public ResponseEntity<Object> addChildLifeInsuranceDetails(@Valid @RequestBody RequestToAddChildPlanDetails request) {
         ResponseToAddChildPlanDetails response = childPlanService.saveChildPlanDetails(request);
-        return new ResponseHandler().generateSuccessResponse(response,response.getDuplicateRecord()?HttpStatus.FOUND:HttpStatus.CREATED,response.getDuplicateRecord()?"Record already exist":"Saved Successfully");
+        return new ResponseHandler().generateSuccessResponse(response,response.getDuplicateRecord()?HttpStatus.OK:HttpStatus.CREATED,response.getDuplicateRecord()?"Record already exist":Constants.SAVED);
     }
 
     @GetMapping("/{customerId}")
     public ResponseEntity<Object> getChildPlanDetails(@NotNull(message = "customerId should not be null") @PathVariable("customerId") Long customerId) {
         List<ResponseToGetChildPlanDetails> responseList = childPlanService.getChildPlanDetails(customerId);
-        return new ResponseHandler().generateSuccessResponse(responseList, HttpStatus.OK,"Success");
+        return new ResponseHandler().generateSuccessResponse(responseList, HttpStatus.OK,Constants.SUCCESS);
     }
 
-    @PatchMapping("/{childPlanId}")
-    public ResponseEntity<Object> patchChildPlanDetails(@PathVariable("childPlanId") Long childPlanId,@RequestParam("isInterestedInPlan") Boolean isInterestedInPlan) throws Exception {
-        Integer count = childPlanService.updateChildPlanDtails(childPlanId,isInterestedInPlan);
-        return new ResponseHandler().generateSuccessResponse(HttpStatus.OK,"Updated Successfully");
+    @PatchMapping
+    public ResponseEntity<Object> patchChildPlanDetails(@RequestBody RequestToUpdateChildPlan request) throws Exception {
+        Integer count = childPlanService.updateChildPlanDtails(request);
+        if(Optional.of(count).isPresent() && count == 0){
+            return new ResponseHandler().generateFailureResponse(HttpStatus.NOT_FOUND,Constants.NOT_UPDATED,null);
+        }
+        return new ResponseHandler().generateSuccessResponse(HttpStatus.OK, Constants.UPDATED);
     }
-
 
 }
