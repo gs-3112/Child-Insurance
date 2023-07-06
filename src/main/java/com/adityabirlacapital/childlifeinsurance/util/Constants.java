@@ -6,7 +6,6 @@ public class Constants {
     public static final String SAVED = "Successfully saved";
     public static final String UPDATED = "Successfully updated";
     public static final String NOT_UPDATED = "Record not found to update";
-
     public static final String SUCCESS = "Success";
 
 }
